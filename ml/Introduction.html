@@ -1,0 +1,839 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction to Machine Learning &#8212; Deep Learning for Molecules and Materials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Intro to Deep Learning" href="../dl/intro.html" />
+    <link rel="prev" title="Deep Learning for Molecules and Materials" href="../intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep Learning for Molecules and Materials</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Machine Learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Deep Learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/intro.html">
+   Intro to Deep Learning
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Made with <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ml/Introduction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/ml/Introduction.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supervised-learning">
+   Supervised Learning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-data">
+     Load Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-exploration">
+     Data Exploration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feature-correlation">
+     Feature Correlation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-model">
+     Linear Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     Gradient Descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batching">
+     Batching
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analyzing-model-performance">
+     Analyzing Model Performance
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   Cited References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-machine-learning">
+<h1>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this headline">¶</a></h1>
+<p>Machine learning is about learning models with data. Firstly, definitions:</p>
+<p><strong>Features</strong></p>
+<p>    set of <span class="math notranslate nohighlight">\(N\)</span> vectors <span class="math notranslate nohighlight">\(\{\vec{x}_i\}\)</span> of dimension <span class="math notranslate nohighlight">\(D\)</span>. Can be reals, integers, classes, etc.</p>
+<p><strong>Labels</strong></p>
+<p>    set of <span class="math notranslate nohighlight">\(N\)</span> integers or reals <span class="math notranslate nohighlight">\(\{y_i\}\)</span>, almost always of dimension <span class="math notranslate nohighlight">\(Y\)</span></p>
+<p><strong>Labeled Data</strong></p>
+<p>    set of <span class="math notranslate nohighlight">\(N\)</span> tuples <span class="math notranslate nohighlight">\(\{\left(\vec{x}, y\right)_i\}\)</span></p>
+<p><strong>Unlabeled Data</strong></p>
+<p>    set of <span class="math notranslate nohighlight">\(N\)</span> features that may have unknown <span class="math notranslate nohighlight">\(y\)</span> labels</p>
+<hr class="docutils" />
+<p>These definitions will become more clear as we use them below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Click the 🚀 above to launch this page as an interactive Google Colab.</p>
+</div>
+<div class="section" id="supervised-learning">
+<h2>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title">Types of learning</p>
+<p>Machine learning has three types of learning: supervised, semi-supervised, and unsupervised. There are two tasks: regression and classification.</p>
+</div>
+<p>Our first task will be <strong>supervised learning</strong>. Supervised learning means predicting <span class="math notranslate nohighlight">\(y\)</span> from <span class="math notranslate nohighlight">\(\vec{x}\)</span> with a model trained on data. It is <em>supervised</em> because we tell the algorithm what the labels are in our dataset. Another method we’ll explore is <strong>unsupervised learning</strong> where we do not tell the algorithm the labels.</p>
+<p>To see an example, we will use a dataset called AqSolDB<a class="bibtex reference internal" href="#sorkun2019" id="id1">[SKE19]</a> that is about 10,000 unique compounds with measured solubility in water (label). The dataset also includes molecular properties (features) that we can use for machine learning.</p>
+<div class="section" id="load-data">
+<h3>Load Data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h3>
+<p>Download the data and load it into a <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> data frame.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The hidden cells below sets-up our imports</p>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">rdkit</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;notebook&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;dark&#39;</span><span class="p">,</span>  <span class="p">{</span><span class="s1">&#39;xtick.bottom&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;ytick.left&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;xtick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;#333333&#39;</span><span class="p">,</span> <span class="s1">&#39;ytick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;#333333&#39;</span><span class="p">})</span>
+<span class="n">color_cycle</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#1BBC9B&#39;</span><span class="p">,</span> <span class="s1">&#39;#F06060&#39;</span><span class="p">,</span> <span class="s1">&#39;#8CBEB2&#39;</span><span class="p">,</span> <span class="s1">&#39;#5C4B51&#39;</span><span class="p">,</span> <span class="s1">&#39;#F3B562&#39;</span><span class="p">]</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color_cycle</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">soldata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://dataverse.harvard.edu/api/access/datafile/3407241?format=original&amp;gbrecs=true&#39;</span><span class="p">)</span>
+<span class="n">soldata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>InChI</th>
+      <th>InChIKey</th>
+      <th>SMILES</th>
+      <th>Solubility</th>
+      <th>SD</th>
+      <th>Ocurrences</th>
+      <th>Group</th>
+      <th>MolWt</th>
+      <th>...</th>
+      <th>NumRotatableBonds</th>
+      <th>NumValenceElectrons</th>
+      <th>NumAromaticRings</th>
+      <th>NumSaturatedRings</th>
+      <th>NumAliphaticRings</th>
+      <th>RingCount</th>
+      <th>TPSA</th>
+      <th>LabuteASA</th>
+      <th>BalabanJ</th>
+      <th>BertzCT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A-3</td>
+      <td>N,N,N-trimethyloctadecan-1-aminium bromide</td>
+      <td>InChI=1S/C21H46N.BrH/c1-5-6-7-8-9-10-11-12-13-...</td>
+      <td>SZEMGTQCPRNXEG-UHFFFAOYSA-M</td>
+      <td>[Br-].CCCCCCCCCCCCCCCCCC[N+](C)(C)C</td>
+      <td>-3.616127</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>392.510</td>
+      <td>...</td>
+      <td>17.0</td>
+      <td>142.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>158.520601</td>
+      <td>0.000000e+00</td>
+      <td>210.377334</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A-4</td>
+      <td>Benzo[cd]indol-2(1H)-one</td>
+      <td>InChI=1S/C11H7NO/c13-11-8-5-1-3-7-4-2-6-9(12-1...</td>
+      <td>GPYLCFQEKPUWLD-UHFFFAOYSA-N</td>
+      <td>O=C1Nc2cccc3cccc1c23</td>
+      <td>-3.254767</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>169.183</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>62.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>29.10</td>
+      <td>75.183563</td>
+      <td>2.582996e+00</td>
+      <td>511.229248</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A-5</td>
+      <td>4-chlorobenzaldehyde</td>
+      <td>InChI=1S/C7H5ClO/c8-7-3-1-6(5-9)2-4-7/h1-5H</td>
+      <td>AVPYQKSLYISFPO-UHFFFAOYSA-N</td>
+      <td>Clc1ccc(C=O)cc1</td>
+      <td>-2.177078</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>140.569</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>46.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>17.07</td>
+      <td>58.261134</td>
+      <td>3.009782e+00</td>
+      <td>202.661065</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A-8</td>
+      <td>zinc bis[2-hydroxy-3,5-bis(1-phenylethyl)benzo...</td>
+      <td>InChI=1S/2C23H22O3.Zn/c2*1-15(17-9-5-3-6-10-17...</td>
+      <td>XTUPUYCJWKHGSW-UHFFFAOYSA-L</td>
+      <td>[Zn++].CC(c1ccccc1)c2cc(C(C)c3ccccc3)c(O)c(c2)...</td>
+      <td>-3.924409</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>756.226</td>
+      <td>...</td>
+      <td>10.0</td>
+      <td>264.0</td>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>6.0</td>
+      <td>120.72</td>
+      <td>323.755434</td>
+      <td>2.322963e-07</td>
+      <td>1964.648666</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A-9</td>
+      <td>4-({4-[bis(oxiran-2-ylmethyl)amino]phenyl}meth...</td>
+      <td>InChI=1S/C25H30N2O4/c1-5-20(26(10-22-14-28-22)...</td>
+      <td>FAUAZXVRLVIARB-UHFFFAOYSA-N</td>
+      <td>C1OC1CN(CC2CO2)c3ccc(Cc4ccc(cc4)N(CC5CO5)CC6CO...</td>
+      <td>-4.662065</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>G1</td>
+      <td>422.525</td>
+      <td>...</td>
+      <td>12.0</td>
+      <td>164.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+      <td>56.60</td>
+      <td>183.183268</td>
+      <td>1.084427e+00</td>
+      <td>769.899934</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 26 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="data-exploration">
+<h3>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h3>
+<p>We can see that there are a number of features like molecular weight, rotatable bonds, valence electrons, etc. And of course, there is the label <strong>solubility</strong>. One of the first things we should always do is get familiar with our data. Let’s just see some specific example, extremes, and get a sense of the range of labels/data. We’ll start with seeing what kind of molecules there are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot one molecule</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromInchi</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">InChI</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="glue-text-mol1-name">
+<div class="cell_output docutils container">
+<img alt="../_images/Introduction_7_0.png" src="../_images/Introduction_7_0.png" />
+</div>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">The first molecule in the dataset rendered using <a class="reference external" href="https://rdkit.org/">rdkit</a></span><a class="headerlink" href="#glue-text-mol1-name" title="Permalink to this image">¶</a></p>
+</div>
+<p>Let’s now look at the extreme values to get a sense of the <strong>range</strong> of solubility data and the molecules that make it. First, we’ll histogram the solubillity which tells us about the shape of its probability distribution and the extreme values.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="figure align-default" id="solubility-histogram">
+<div class="cell_output docutils container">
+<img alt="../_images/Introduction_11_0.png" src="../_images/Introduction_11_0.png" />
+</div>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Histogram of the solubility with kernel density estimate overlain.</span><a class="headerlink" href="#solubility-histogram" title="Permalink to this image">¶</a></p>
+</div>
+<p>The histogram shows that the solubility varies from about 13 to 2.5 and is not normally distributed.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># get 3 lowest and 3 highest solubilities</span>
+<span class="n">soldata_sorted</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Solubility&#39;</span><span class="p">)</span>
+<span class="n">extremes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span> <span class="p">[</span><span class="n">soldata_sorted</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">soldata_sorted</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]]</span> <span class="p">)</span>
+
+<span class="c1"># pardon this slop, we need to have a list of strings for legends</span>
+<span class="n">legend_text</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: solubility = </span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">extremes</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">extremes</span><span class="o">.</span><span class="n">Solubility</span><span class="p">)]</span>
+
+<span class="c1"># now plot them on a grid</span>
+<span class="n">extreme_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromInchi</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span> <span class="k">for</span> <span class="n">inchi</span> <span class="ow">in</span> <span class="n">extremes</span><span class="o">.</span><span class="n">InChI</span><span class="p">]</span>
+<span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span><span class="n">extreme_mols</span><span class="p">,</span><span class="n">molsPerRow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                     <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">),</span>
+                     <span class="n">legends</span><span class="o">=</span><span class="n">legend_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_revmove-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span><span class="n">extreme_mols</span><span class="p">,</span><span class="n">molsPerRow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                     <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">250</span><span class="p">),</span>
+                     <span class="n">legends</span><span class="o">=</span><span class="n">legend_text</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s1">&#39;extremes&#39;</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="figure align-default" id="fig-extreme">
+<div class="cell_output docutils container">
+<img alt="../_images/Introduction_14_0.png" src="../_images/Introduction_14_0.png" />
+</div>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">The top 3 and bottom 3 extreme molecule solubilities.</span><a class="headerlink" href="#fig-extreme" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-extreme"><span class="std std-ref">Figure 3</span></a> shows highly-chlorinated compounds have the lowest solubility and ioinc compounds have higher solubility. Is A-2918 an <strong>outlier</strong>, a mistake? Also, is NH<span class="math notranslate nohighlight">\(_3\)</span> really comparable to these organic compounds? These are the kind of questions that you should consider <em>before</em> doing any modeling.</p>
+<div class="margin sidebar">
+<p class="sidebar-title">Outliers</p>
+<p>Outliers are extreme values that fall outside of your normal data distribution. They can be mistakes, be from a different distribution (e.g., metals instead of organic molecules), and can have a strong effect on model training.</p>
+</div>
+</div>
+<div class="section" id="feature-correlation">
+<h3>Feature Correlation<a class="headerlink" href="#feature-correlation" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s examine the features and see how correlated they are with solubility. Note that there are a few columns unrelated to features or solubility: <code class="docutils literal notranslate"><span class="pre">SD</span></code> (standard deviation), <code class="docutils literal notranslate"><span class="pre">Ocurrences</span></code> (how often the molecule occured in the constituent databases), and <code class="docutils literal notranslate"><span class="pre">Group</span></code> (where the data came from).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">features_start_at</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;MolWt&#39;</span><span class="p">)</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">features_start_at</span><span class="p">:]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># don&#39;t want to think about i/j</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_names</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">soldata</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="p">,</span> 
+        <span class="n">s</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">color_cycle</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_cycle</span><span class="p">)])</span> <span class="c1"># add some color </span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solubility&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="c1"># hide empty subplots</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">axs</span><span class="p">)):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Introduction_18_0.png" src="../_images/Introduction_18_0.png" />
+</div>
+</div>
+<p>It’s interesting that molecular weight or hydrogen bond numbers seem to have little correlation, at least from this plot. MolLogP, which is a computed estimated related to solubility, does correlate well. You can also see that some of these features have low <strong>variance</strong>, meaning the value of the feature is the same for many data points (e.g., “NumHDonors”).</p>
+</div>
+<div class="section" id="linear-model">
+<h3>Linear Model<a class="headerlink" href="#linear-model" title="Permalink to this headline">¶</a></h3>
+<p>Let’s begin with one of the simplest approaches — a linear model. This is our first type of supervised learning and is rarely used due to something we’ll see — the difficult choice of features.</p>
+<p>Our model will be defined by this equation:</p>
+<p>\begin{equation}
+y = \vec{w} \cdot \vec{x} + b
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a vector of adjustable parameters and <span class="math notranslate nohighlight">\(b\)</span> is also adjustable (called <strong>bias</strong>). Let us define it. We’ll be using a library called <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/quickstart.html"><code class="docutils literal notranslate"><span class="pre">jax</span></code></a> that is very similar to numpy except it can compute analytical gradients easily via autodiff.</p>
+<div class="margin sidebar">
+<p class="sidebar-title">Autodiff</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">Autodiff</a> is a computer program tool
+that can compute analytical gradients with respect to two variables in a program.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># test it out</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">4.3</span>
+
+<span class="n">linear_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray(5.5, dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now comes the critical question: <em>How do we find the adjustable parameters <span class="math notranslate nohighlight">\(\vec{w}\)</span> and <span class="math notranslate nohighlight">\(b\)</span></em>?</p>
+<p>This question has led to thousands of papers and there are many good ideas. I will take a shortcut and skip to a modern answer: we pick a <strong>loss</strong> function and minimize with <strong>gradients</strong>. Let’s define these quantities and compute our loss with some initial random w and b</p>
+<div class="margin sidebar">
+<p class="sidebar-title">Loss</p>
+<p>A loss is a function which takes in a model prediction <span class="math notranslate nohighlight">\(\hat{y}\)</span>,
+labels <span class="math notranslate nohighlight">\(y\)</span>, and computes a scalar representing how poor the fit is.
+Our goal is to minimize loss.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert data into features, labels</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">feature_dim</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># initialize our parmaters</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">feature_dim</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.</span>
+
+<span class="c1"># define loss</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">labels</span><span class="p">))</span>
+
+<span class="c1"># test it out</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray(792.56726, dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wow! Our loss is terrrible, especially considering that solubilities are between -13 and 2. But, that’s right since we just guessed our initial parameters.</p>
+</div>
+<div class="section" id="gradient-descent">
+<h3>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h3>
+<p>We will now try to reduce loss by using information about how it changes with respect to the adjustable parameters. If we write our loss as:</p>
+<p>\begin{equation}
+L = \frac{1}{N}\sum_i^N |y_i - f(\vec{x}_i, \vec{w}, b)|
+\end{equation}</p>
+<p>we can compute our loss gradients with respect to the adjustable parameters:</p>
+<p>\begin{equation}
+\frac{\partial L}{\partial \vec{w}}, \frac{\partial L}{\partial \vec{b}}
+\end{equation}</p>
+<p>we can try to reduce its value by taking a step in the direction of its negative gradient:
+\begin{equation}
+(w’, b’) = \left(w - \eta \frac{\partial L}{\partial \vec{w}}, b - \eta\frac{\partial L}{\partial \vec{b}}\right)
+\end{equation}</p>
+<p>where <span class="math notranslate nohighlight">\(\eta\)</span> is some adjustable parameters. Let’s try this procedure, which is called <strong>gradient descent</strong>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title">jax.grad</p>
+<p>This computes an analytical derivative a python function.
+It takes two arguments: the function and which args to
+take the derivative of. For example, consider <code class="docutils literal notranslate"><span class="pre">f(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code>, then <code class="docutils literal notranslate"><span class="pre">jax.grad(f,(1,2))</span></code>
+gives <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span>. Note too that
+<span class="math notranslate nohighlight">\(x\)</span> may be a tensor. <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.html#jax.grad">API</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute gradients</span>
+<span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># test it out</span>
+<span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(DeviceArray([-2.5836633e+02, -1.9866154e+00, -6.5973160e+01,
+              -1.7190680e+01, -3.4731359e+00, -1.1051626e+00,
+              -5.0856853e+00, -4.0503259e+00, -9.3106949e+01,
+              -1.0682911e+00, -2.9082111e-01, -4.4579330e-01,
+              -1.5140854e+00, -6.2021004e+01, -1.0671108e+02,
+              -2.3276105e+00, -4.6679507e+02], dtype=float32),
+ DeviceArray(-0.95071083, dtype=float32))
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve computed the gradient. Now we’ll minimize it over a few steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-4</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Introduction_27_0.png" src="../_images/Introduction_27_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="batching">
+<h3>Batching<a class="headerlink" href="#batching" title="Permalink to this headline">¶</a></h3>
+<p>This is making good progress. But let’s try to speed things up with a small change. We’ll use <strong>batching</strong>, which is how training is actually done in machine learning.  The small change to do batching is that rather than using all data at once, we only take a small <strong>batch</strong> of data. Batching provides two benefits: it reduces the amount of time to compute an update to our parameters and it makes the training process random. The randomness makes it possible to escape local minima that might stop training progress. This addition of batching makes our algorithm <strong>stochastic</strong> and thus we call this procedure <strong>stochastic gradient descent</strong> (SGD). SGD, and variations of it, are the most common methods of training in deep learning.</p>
+<div class="margin sidebar">
+<p class="sidebar-title">batch</p>
+<p>A batch is a subset of your data, usually as a power of 2 (e.g., 16, 128).
+Having random batches of data is how gradient descent becomes stochastic gradient descent.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-4</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="c1"># number of data points</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+<span class="c1"># compute how much data fits nicely into a batch</span>
+<span class="c1"># and drop extra data</span>
+<span class="n">new_N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="n">batch_size</span>
+
+<span class="c1"># the -1 means that numpy will compute</span>
+<span class="c1"># what that dimension should be</span>
+<span class="n">batched_features</span> <span class="o">=</span>  <span class="n">features</span><span class="p">[:</span><span class="n">new_N</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">feature_dim</span><span class="p">))</span>
+<span class="n">batched_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[:</span><span class="n">new_N</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">250</span><span class="p">):</span>
+    <span class="c1"># choose a random set of </span>
+    <span class="c1"># indices to slice our data </span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">batched_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">batched_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># we still compute loss on whole dataset, but not every step</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Step&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Introduction_29_0.png" src="../_images/Introduction_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analyzing-model-performance">
+<h3>Analyzing Model Performance<a class="headerlink" href="#analyzing-model-performance" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="cited-references">
+<h2>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-ml/Introduction-0"><dl class="citation">
+<dt class="bibtex label" id="sorkun2019"><span class="brackets"><a class="fn-backref" href="#id1">SKE19</a></span></dt>
+<dd><p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. URL: <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">https://doi.org/10.1038/s41597-019-0151-1</a>, <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Deep Learning for Molecules and Materials</a>
+    <a class='right-next' id="next-link" href="../dl/intro.html" title="next page">Intro to Deep Learning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Andrew D. White<br/>
+        
+            &copy; Copyright 2020.<br/>
+          <div class="extra_footer">
+            <a href="http://thewhitelab.org">thewhitelab.org</a>
+          </div>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
